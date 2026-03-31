@@ -2,24 +2,22 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Copy csproj and restore as distinct layers
-COPY ["AiDev.Backend.csproj", "."]
-RUN dotnet restore "./AiDev.Backend.csproj"
+# Copy only the project file to restore dependencies (for caching)
+COPY ["backend/AiDev.Backend/AiDev.Backend.csproj", "backend/AiDev.Backend/"]
+RUN dotnet restore "backend/AiDev.Backend/AiDev.Backend.csproj"
 
-# Copy everything else and build app
+# Copy the rest of the code
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "AiDev.Backend.csproj" -c Release -o /app/build
+WORKDIR "/src/backend/AiDev.Backend"
 
-# Publish stage
-FROM build AS publish
+# Build and Publish
+RUN dotnet build "AiDev.Backend.csproj" -c Release -o /app/build
 RUN dotnet publish "AiDev.Backend.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Final stage
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 EXPOSE 8080
-COPY --from=publish /app/publish .
-# Default Render port is 8080 or it can be configured, but .NET 8+ defaults to 8080 or 5000 depending on env
+COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "AiDev.Backend.dll"]
