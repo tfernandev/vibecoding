@@ -22,11 +22,13 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", 
-                           "http://localhost:3001", 
-                           "https://vibecoding-ten-teal.vercel.app")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.SetIsOriginAllowed(origin => 
+        {
+            var uri = new Uri(origin);
+            return uri.Host == "localhost" || uri.Host.EndsWith(".vercel.app");
+        })
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
