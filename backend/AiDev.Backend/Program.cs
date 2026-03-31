@@ -25,7 +25,9 @@ builder.Services.AddCors(options =>
         policy.SetIsOriginAllowed(origin => 
         {
             var uri = new Uri(origin);
-            return uri.Host == "localhost" || uri.Host.EndsWith(".vercel.app");
+            return uri.Host == "localhost" || 
+                   uri.Host.EndsWith(".vercel.app") || 
+                   uri.Host.EndsWith(".onrender.com");
         })
         .AllowAnyHeader()
         .AllowAnyMethod();
