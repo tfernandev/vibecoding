@@ -41,6 +41,18 @@ app.UseMiddleware<TenantResolverMiddleware>();
 // Enable CORS before other middleware
 app.UseCors("Frontend");
 
+// Automate Database Migrations (Senior Architectural Move)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    try {
+        db.Database.Migrate();
+        Console.WriteLine("✅ Supabase/PostgreSQL Migrations applied successfully.");
+    } catch (Exception ex) {
+        Console.WriteLine($"⚠️ Migration failed (check connection string): {ex.Message}");
+    }
+}
+
 app.UseAuthorization();
 
 app.MapControllers();
