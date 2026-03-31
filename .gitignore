@@ -1,0 +1,34 @@
+# --- Root level ---
+.vscode/
+*.swp
+*.log
+portfolio-assets/
+
+# --- Frontend (Next.js) ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# --- Backend (.NET) ---
+backend/AiDev.Backend/bin/
+backend/AiDev.Backend/obj/
+backend/AiDev.Backend/appsettings.Development.json
+backend/AiDev.Backend/appsettings.Production.json
+backend/AiDev.Backend/out.txt
+backend/AiDev.Backend/build_error.txt
+backend/AiDev.Backend/build_result.txt
+*.user
+*.userosscache
+*.sln.docstates
+
+# --- VS Code ---
+.history/
+.ionide/

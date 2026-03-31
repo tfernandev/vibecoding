@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Engineering for Devs – Curso para Senior Developers</title>
+  <meta name="description"
+    content="El curso definitivo de IA para developers senior. Aprende prompt engineering real, patrones profesionales, multi-tool strategy y arquitectura asistida por IA. No es magia, es ingeniería." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-bracket">&lt;</span>AI.dev<span class="logo-bracket">/&gt;</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#quiz">Diagnóstico</a></li>
+        <li><a href="#modulos">Módulos</a></li>
+        <li><a href="#instructor">Instructor</a></li>
+        <li><a href="#precio">Precio</a></li>
+      </ul>
+      <a href="#precio" class="nav-cta" id="nav-cta-btn">Quiero el curso</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Para Senior Devs · Tech Leads · Arquitectos
+      </div>
+      <h1 class="hero-title">
+        La IA no debería<br />
+        <span class="gradient-text">reemplazarte.</span><br />
+        Debería amplificarte.
+      </h1>
+      <p class="hero-subtitle">
+        Si sos senior, la IA no reemplaza tu criterio. Lo amplifica.
+        Si sos tech lead, <strong>necesitás entender cómo tus juniors la están usando.</strong>
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Supervisión de código IA</span>
+        <span class="tag">Workflows con criterio</span>
+        <span class="tag">Director Cognitivo</span>
+        <span class="tag">Anti-Patterns</span>
+        <span class="tag">Orquestación</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#quiz" class="btn-primary" id="hero-quiz-btn">Hacé el diagnóstico →</a>
+        <a href="#modulos" class="btn-secondary" id="hero-explore-btn">Ver el programa</a>
+      </div>
+      <div class="hero-quote">
+        <blockquote>"La diferencia entre un junior con Copilot y un senior real es criterio. Esto es criterio aplicado a
+          IA."</blockquote>
+      </div>
+      <div class="hero-social-proof">
+        <div class="sp-avatars">
+          <div class="sp-avatar" style="background: linear-gradient(135deg,#FF6B00,#FFB703)">JR</div>
+          <div class="sp-avatar" style="background: linear-gradient(135deg,#FFB703,#FFD166)">MS</div>
+          <div class="sp-avatar" style="background: linear-gradient(135deg,#FF8C42,#FFC93C)">PL</div>
+          <div class="sp-avatar" style="background: linear-gradient(135deg,#FFD166,#FF6B00)">CA</div>
+        </div>
+        <p>+200 devs senior ya esperan el lanzamiento</p>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="terminal-title">prompt.engineer.ts</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="terminal-line"><span class="t-comment">// Prompt con contrato explícito</span></div>
+          <div class="terminal-line"><span class="t-keyword">const</span> <span class="t-var">prompt</span> = {</div>
+          <div class="terminal-line t-indent"><span class="t-key">role</span>: <span class="t-str">"arquitecto de
+              software senior"</span>,</div>
+          <div class="terminal-line t-indent"><span class="t-key">context</span>: <span class="t-str">"sistema DDD con
+              CQRS en .NET"</span>,</div>
+          <div class="terminal-line t-indent"><span class="t-key">task</span>: <span class="t-str">"evaluar trade-offs
+              del patrón Saga"</span>,</div>
+          <div class="terminal-line t-indent"><span class="t-key">constraints</span>: [</div>
+          <div class="terminal-line t-indent-2"><span class="t-str">"sin cambiar bounded contexts"</span>,</div>
+          <div class="terminal-line t-indent-2"><span class="t-str">"máximo 3 alternativas"</span>,</div>
+          <div class="terminal-line t-indent">],</div>
+          <div class="terminal-line t-indent"><span class="t-key">output</span>: <span class="t-str">"tabla comparativa
+              + recomendación"</span></div>
+          <div class="terminal-line">};</div>
+          <div class="terminal-line">&nbsp;</div>
+          <div class="terminal-line"><span class="t-comment">// Resultado: ingeniería, no magia ✓</span></div>
+          <div class="terminal-cursor">█</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ — DIAGNÓSTICO COGNITIVO -->
+  <section id="quiz">
+    <div class="quiz-shell">
+      <!-- Background canvas for neural animation -->
+      <canvas id="quiz-canvas"></canvas>
+
+      <div class="quiz-inner">
+        <!-- Progress ring -->
+        <div class="quiz-progress-wrap">
+          <svg class="quiz-ring" viewBox="0 0 44 44" aria-hidden="true">
+            <circle class="quiz-ring-bg" cx="22" cy="22" r="18" />
+            <circle class="quiz-ring-fill" id="quiz-ring-fill" cx="22" cy="22" r="18" />
+          </svg>
+          <span class="quiz-step-label" id="quiz-step-label">1 / 5</span>
+        </div>
+
+        <!-- Steps container -->
+        <div class="quiz-steps" id="quiz-steps">
+
+          <!-- STEP 1: Rol -->
+          <div class="quiz-step active" data-step="1">
+            <p class="quiz-eyebrow">Paso 1 de 5</p>
+            <h2 class="quiz-question">¿Qué rol cumplís hoy?</h2>
+            <div class="quiz-options" data-key="rol">
+              <button class="quiz-opt" data-value="senior">👨‍💻 Senior Dev</button>
+              <button class="quiz-opt" data-value="techlead">🧭 Tech Lead</button>
+              <button class="quiz-opt" data-value="arquitecto">🏛️ Arquitecto</button>
+              <button class="quiz-opt" data-value="founder">🚀 Founder técnico</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Equipo -->
+          <div class="quiz-step" data-step="2">
+            <p class="quiz-eyebrow">Paso 2 de 5</p>
+            <h2 class="quiz-question">¿Tu equipo usa IA para programar?</h2>
+            <div class="quiz-options" data-key="equipo">
+              <button class="quiz-opt" data-value="intensivo">🔥 Sí, intensivamente</button>
+              <button class="quiz-opt" data-value="algunos">⚡ Algunos sí</button>
+              <button class="quiz-opt" data-value="poco">💤 Casi no</button>
+              <button class="quiz-opt" data-value="nodesa">🤷 No lo sé</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Dolor -->
+          <div class="quiz-step" data-step="3">
+            <p class="quiz-eyebrow">Paso 3 de 5</p>
+            <h2 class="quiz-question">¿Qué te preocupa más de IA en tu equipo?</h2>
+            <div class="quiz-options" data-key="dolor">
+              <button class="quiz-opt" data-value="comprension">🧠 Código sin comprensión</button>
+              <button class="quiz-opt" data-value="deuda">🕳️ Deuda técnica invisible</button>
+              <button class="quiz-opt" data-value="criterio">🎯 Falta de criterio</button>
+              <button class="quiz-opt" data-value="arquitectura">🏗️ Arquitectura inconsistente</button>
+              <button class="quiz-opt" data-value="seniority">📉 Pérdida de seniority</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Uso personal -->
+          <div class="quiz-step" data-step="4">
+            <p class="quiz-eyebrow">Paso 4 de 5</p>
+            <h2 class="quiz-question">Cuando usás IA, normalmente…</h2>
+            <div class="quiz-options" data-key="uso">
+              <button class="quiz-opt" data-value="copio">📋 Copio y ajusto</button>
+              <button class="quiz-opt" data-value="brainstorm">💡 La uso como brainstorming</button>
+              <button class="quiz-opt" data-value="arquitectura">📐 La uso para arquitectura</button>
+              <button class="quiz-opt" data-value="desconfio">🔒 No confío mucho</button>
+            </div>
+          </div>
+
+          <!-- STEP 5: Evaluación de prompt -->
+          <div class="quiz-step" data-step="5">
+            <p class="quiz-eyebrow">Paso 5 de 5 — Mini evaluación</p>
+            <h2 class="quiz-question">¿Qué está mal en este prompt?</h2>
+            <div class="quiz-prompt-example">
+              <code>"Escribime código para un sistema que maneje usuarios."</code>
+            </div>
+            <div class="quiz-options" data-key="eval">
+              <button class="quiz-opt" data-value="a" data-correct="false">A. Es muy corto</button>
+              <button class="quiz-opt" data-value="b" data-correct="true">B. No tiene contexto, rol ni output
+                esperado</button>
+              <button class="quiz-opt" data-value="c" data-correct="false">C. Debería ser en inglés</button>
+              <button class="quiz-opt" data-value="d" data-correct="false">D. No pide código Python</button>
+            </div>
+            <div class="quiz-feedback" id="quiz-feedback" hidden></div>
+          </div>
+
+        </div><!-- /quiz-steps -->
+
+        <!-- RESULT -->
+        <div class="quiz-result" id="quiz-result" hidden>
+          <div class="result-profile" id="result-profile">
+            <div class="result-orb" id="result-orb"></div>
+            <h2 class="result-title" id="result-title"></h2>
+            <p class="result-desc" id="result-desc"></p>
+          </div>
+          <div class="result-modules">
+            <p class="result-modules-label">Según tus respuestas, estos módulos son críticos para vos:</p>
+            <div class="result-module-list" id="result-module-list"></div>
+          </div>
+          <div class="result-ctas">
+            <a href="#precio" class="btn-primary" id="result-enroll-btn">Quiero el programa completo</a>
+            <button class="btn-ghost" id="quiz-restart-btn">Repetir diagnóstico</button>
+          </div>
+        </div>
+
+      </div><!-- /quiz-inner -->
+    </div><!-- /quiz-shell -->
+  </section>
+
+  <!-- PROBLEM SECTION -->
+
+  <section id="problema">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-left">
+          <span class="section-label">El problema real</span>
+          <h2>Usar IA no es lo mismo que <em>ingeniería</em> con IA.</h2>
+          <p>Hay miles de cursos que te enseñan a "mejorar tus prompts" con tips de influencer. Este no es uno de ellos.
+          </p>
+          <p>Si sos dev senior, necesitás entender el modelo, controlar el output, mantener ownership de la arquitectura
+            y no convertirte en un copy-paste engineer.</p>
+        </div>
+        <div class="problem-cards">
+          <div class="problem-card bad">
+            <div class="pc-icon">❌</div>
+            <h4>"Sé más específico en tus prompts"</h4>
+            <p>Tip de 15 segundos, sin estructura, sin ingeniería.</p>
+          </div>
+          <div class="problem-card bad">
+            <div class="pc-icon">❌</div>
+            <h4>"Usá ChatGPT para todo"</h4>
+            <p>Sobredependencia. Pérdida de criterio técnico.</p>
+          </div>
+          <div class="problem-card good">
+            <div class="pc-icon">✓</div>
+            <h4>Prompt como contrato de API</h4>
+            <p>Rol, contexto, restricciones y output definidos. Reproducible.</p>
+          </div>
+          <div class="problem-card good">
+            <div class="pc-icon">✓</div>
+            <h4>Pipeline multi-herramienta</h4>
+            <p>Copilot, GPT, Gemini, Cursor — cada uno en su lugar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modulos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">El programa</span>
+        <h2>8 módulos que te convierten en un dev que <em>domina</em> la IA</h2>
+        <p class="section-desc">Sin tips genéricos. Patrones reales, errores documentados, casos de uso de backend
+          senior.</p>
+      </div>
+
+      <div class="modules-grid">
+
+        <!-- M1 -->
+        <div class="module-card" data-module="1">
+          <div class="module-header">
+            <div class="module-number">01</div>
+            <div class="module-badge system">Fundamentos</div>
+          </div>
+          <h3 class="module-title">Cómo funciona realmente la IA</h3>
+          <p class="module-desc">LLMs como modelos predictivos probabilísticos. Qué significa "no razona, predice".
+            Context window, tokens, temperatura y determinismo. Limitaciones estructurales: alucinación, sesgo, drift.
+          </p>
+          <div class="module-topics">
+            <span>LLMs</span><span>Tokens</span><span>Temperatura</span><span>Alucinación</span><span>Ventana de
+              Contexto</span>
+          </div>
+          <div class="module-insight">
+            <span class="insight-label">Clave mental</span>
+            Cuando sabés que la IA no entiende, cambias cómo la usás.
+          </div>
+        </div>
+
+        <!-- M2 -->
+        <div class="module-card" data-module="2">
+          <div class="module-header">
+            <div class="module-number">02</div>
+            <div class="module-badge design">Diseño</div>
+          </div>
+          <h3 class="module-title">Prompt Engineering como Diseño de Interfaces</h3>
+          <p class="module-desc">Un prompt es una API call sin tipos. Estructura contract-first aplicada a lenguaje
+            natural. Rol + contexto + restricciones + output. Few-shot, outputs estructurados (JSON, tablas),
+            restricciones duras vs blandas.</p>
+          <div class="module-topics">
+            <span>Contract-First</span><span>Few-Shot</span><span>JSON Output</span><span>Restricciones</span>
+          </div>
+          <div class="module-insight">
+            <span class="insight-label">Conexión .NET</span>
+            Diseño de APIs → Diseño de prompts. El mismo mindset.
+          </div>
+        </div>
+
+        <!-- M3 -->
+        <div class="module-card featured" data-module="3">
+          <div class="module-header">
+            <div class="module-number">03</div>
+            <div class="module-badge patterns">Patrones Pro</div>
+          </div>
+          <h3 class="module-title">Prompt Patterns Profesionales</h3>
+          <p class="module-desc">No tips. Patrones reutilizables con nombre y estructura definida. Para cada problema de
+            ingeniería, el patrón correcto.</p>
+          <div class="patterns-list">
+            <div class="pattern-item">
+              <span class="pattern-icon">🔍</span>
+              <div>
+                <strong>Descomposición</strong>
+                <small>Dividí el problema en subproblemas independientes.</small>
+              </div>
+            </div>
+            <div class="pattern-item">
+              <span class="pattern-icon">🧠</span>
+              <div>
+                <strong>Dual Mode</strong>
+                <small>Primero pensá, después respondé.</small>
+              </div>
+            </div>
+            <div class="pattern-item">
+              <span class="pattern-icon">🧱</span>
+              <div>
+                <strong>Contract Generator</strong>
+                <small>Definí interfaces y responsabilidades primero.</small>
+              </div>
+            </div>
+            <div class="pattern-item">
+              <span class="pattern-icon">🔁</span>
+              <div>
+                <strong>Iteración Controlada</strong>
+                <small>MVP → optimización incremental.</small>
+              </div>
+            </div>
+            <div class="pattern-item">
+              <span class="pattern-icon">🧨</span>
+              <div>
+                <strong>Crítico Hostil</strong>
+                <small>Criticá esto como reviewer senior.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- M4 -->
+        <div class="module-card" data-module="4">
+          <div class="module-header">
+            <div class="module-number">04</div>
+            <div class="module-badge efficiency">Eficiencia</div>
+          </div>
+          <h3 class="module-title">Eficiencia y Flujo de Trabajo</h3>
+          <p class="module-desc">Cuándo usar IA y cuándo no. Cómo evitar overdependencia y mantener ownership del
+            código. Gestión de contexto en sesiones largas. Cómo evitar que la IA degrade la arquitectura en
+            iteraciones.</p>
+          <div class="module-topics">
+            <span>Ownership</span><span>Context Drift</span><span>Resumen Sin Pérdida</span><span>Arquitectura
+              Sostenible</span>
+          </div>
+          <div class="module-insight">
+            <span class="insight-label">Esto es oro</span>
+            Casi nadie enseña cómo no perder el control del proyecto.
+          </div>
+        </div>
+
+        <!-- M5 -->
+        <div class="module-card" data-module="5">
+          <div class="module-header">
+            <div class="module-number">05</div>
+            <div class="module-badge multitool">Multi-Tool</div>
+          </div>
+          <h3 class="module-title">Multi-Tool Strategy</h3>
+          <p class="module-desc">No como lista de herramientas. Como pipeline de trabajo real. GitHub Copilot para
+            generación inline. ChatGPT para diseño y razonamiento. Gemini para contraste y validación. Cursor para
+            refactors masivos.</p>
+          <div class="tool-pipeline">
+            <div class="tool-node">
+              <span class="tool-icon">⚡</span>
+              <span>Copilot</span>
+              <small>inline gen</small>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="tool-node">
+              <span class="tool-icon">🤖</span>
+              <span>ChatGPT</span>
+              <small>diseño</small>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="tool-node">
+              <span class="tool-icon">💎</span>
+              <span>Gemini</span>
+              <small>validación</small>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="tool-node">
+              <span class="tool-icon">🔧</span>
+              <span>Cursor</span>
+              <small>refactor</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- M6 -->
+        <div class="module-card" data-module="6">
+          <div class="module-header">
+            <div class="module-number">06</div>
+            <div class="module-badge architecture">Arquitectura</div>
+          </div>
+          <h3 class="module-title">IA + Arquitectura de Software</h3>
+          <p class="module-desc">Usar IA para definir bounded contexts, evaluar trade-offs, generar alternativas
+            arquitectónicas, simular decisiones técnicas y analizar deuda técnica. Conectado con perfil backend senior
+            real.</p>
+          <div class="module-topics">
+            <span>Bounded Contexts</span><span>Trade-Offs</span><span>DDD</span><span>Deuda
+              Técnica</span><span>CQRS</span>
+          </div>
+        </div>
+
+        <!-- M7 -->
+        <div class="module-card danger" data-module="7">
+          <div class="module-header">
+            <div class="module-number">07</div>
+            <div class="module-badge antipatterns">Anti-Patterns</div>
+          </div>
+          <h3 class="module-title">Anti-Patterns que Matan Devs</h3>
+          <p class="module-desc">El módulo que da credibilidad. Errores reales, documentados, que convierten seniors en
+            copy-paste engineers.</p>
+          <div class="antipatterns-list">
+            <div class="ap-item"><span>☠</span> Copiar sin validar</div>
+            <div class="ap-item"><span>☠</span> No entender lo generado</div>
+            <div class="ap-item"><span>☠</span> Pedir "optimizar" sin métrica</div>
+            <div class="ap-item"><span>☠</span> No fijar restricciones</div>
+            <div class="ap-item"><span>☠</span> No definir contexto arquitectónico</div>
+            <div class="ap-item"><span>☠</span> Dejar que la IA cambie patrones del proyecto</div>
+          </div>
+        </div>
+
+        <!-- M8 -->
+        <div class="module-card" data-module="8">
+          <div class="module-header">
+            <div class="module-number">08</div>
+            <div class="module-badge advanced">Avanzado</div>
+          </div>
+          <h3 class="module-title">Orquestación y Cognitive Workflow</h3>
+          <p class="module-desc">Cadena de prompts con roles encadenados. Auto-crítica y generación + validación
+            cruzada. Generación de tests automáticos. Contraejemplos. Diseño del ciclo iterativo completo: intención →
+            opciones → crítica → refinamiento → validación manual.</p>
+          <div class="module-topics">
+            <span>Prompt Chains</span><span>Auto-Crítica</span><span>Testing IA</span><span>Workflow Diseño</span>
+          </div>
+          <div class="module-insight">
+            <span class="insight-label">Nivel</span>
+            Ingeniería cognitiva. No es prompting, es orquestación.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHOM -->
+  <section id="para-quien">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Para quién es esto</span>
+        <h2>No es para todos. Está diseñado para vos si...</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card yes">
+          <div class="aud-icon">✓</div>
+          <h4>Sos dev con 3+ años de experiencia</h4>
+          <p>Backend, full-stack o arquitecto. Ya sabés programar, querés multiplicar tu output.</p>
+        </div>
+        <div class="audience-card yes">
+          <div class="aud-icon">✓</div>
+          <h4>Ya usás IA pero sentís que no la controlás</h4>
+          <p>Resultados inconsistentes, contexto que se pierde, código que no podés defender.</p>
+        </div>
+        <div class="audience-card yes">
+          <div class="aud-icon">✓</div>
+          <h4>Querés seguir siendo senior, no volverse junior asistido</h4>
+          <p>Mantener criterio técnico y ownership de las decisiones de arquitectura.</p>
+        </div>
+        <div class="audience-card no">
+          <div class="aud-icon">✗</div>
+          <h4>Buscás "tips rápidos" o hacks virales</h4>
+          <p>Hay miles de cursos para eso. Este no es uno de ellos.</p>
+        </div>
+        <div class="audience-card no">
+          <div class="aud-icon">✗</div>
+          <h4>Estás empezando a programar</h4>
+          <p>Necesitás primero dominar los fundamentos sin IA. Después volvé.</p>
+        </div>
+        <div class="audience-card yes">
+          <div class="aud-icon">✓</div>
+          <h4>Trabajás con .NET, Node, Python — backend</h4>
+          <p>Los ejemplos están orientados a problemas de ingeniería de backend real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTRUCTOR -->
+  <section id="instructor">
+    <div class="container">
+      <div class="instructor-layout">
+        <div class="instructor-avatar-wrap">
+          <div class="instructor-avatar">
+            <div class="avatar-glow"></div>
+            <div class="avatar-inner">
+              <span class="avatar-initials">SD</span>
+            </div>
+          </div>
+          <div class="instructor-stats">
+            <div class="stat">
+              <span class="stat-num">10+</span>
+              <span class="stat-label">años en backend</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">.NET</span>
+              <span class="stat-label">arquitectura real</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">DDD</span>
+              <span class="stat-label">en producción</span>
+            </div>
+          </div>
+        </div>
+        <div class="instructor-bio">
+          <span class="section-label">El instructor</span>
+          <h2>Dev Senior.<br />Arquitecto.<br />Pragmático.</h2>
+          <p>No vengo de la academia de IA. Vengo de años construyendo sistemas reales en .NET, diseñando arquitecturas
+            con DDD y CQRS, y aprendiendo a integrar IA sin perder el control del producto.</p>
+          <p>Este curso es lo que yo hubiera querido tener cuando empecé a usar IA en sistemas de producción: no un
+            tutorial de ChatGPT, sino un framework de ingeniería.</p>
+          <div class="instructor-badges">
+            <span class="ibadge">.NET Senior</span>
+            <span class="ibadge">DDD / CQRS</span>
+            <span class="ibadge">Backend Architecture</span>
+            <span class="ibadge">AI Engineering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="precio">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Planes</span>
+        <h2>Elegí el plan que encaja con tu <em>nivel</em></h2>
+        <p class="section-desc">Desde acceso gratuito hasta soluciones enterprise. Cancelá cuando quieras.</p>
+      </div>
+
+      <div class="pricing-tiers">
+
+        <!-- FREE -->
+        <div class="tier-card" id="tier-free">
+          <div class="tier-header">
+            <span class="tier-emoji">🟢</span>
+            <h3>Free</h3>
+            <div class="tier-price">
+              <span class="tier-amount">$0</span>
+              <span class="tier-period">por siempre</span>
+            </div>
+          </div>
+          <ul class="tier-features">
+            <li><span>✓</span> 2 módulos de muestra</li>
+            <li><span>✓</span> Sandbox limitado (5 sesiones)</li>
+            <li><span>✓</span> Comunidad read-only</li>
+            <li class="tier-feature-muted"><span>✗</span> Prompt Linter</li>
+            <li class="tier-feature-muted"><span>✗</span> Historial</li>
+            <li class="tier-feature-muted"><span>✗</span> Multi-tool strategy</li>
+          </ul>
+          <a href="#" class="btn-secondary btn-large" id="tier-free-btn">Empezar gratis</a>
+        </div>
+
+        <!-- PRO (RECOMMENDED) -->
+        <div class="tier-card tier-recommended" id="tier-pro">
+          <div class="tier-badge">⭐ Recomendado</div>
+          <div class="tier-header">
+            <span class="tier-emoji">🟠</span>
+            <h3>Pro</h3>
+            <div class="tier-price">
+              <span class="tier-amount">$29</span>
+              <span class="tier-period">/ mes</span>
+            </div>
+          </div>
+          <ul class="tier-features">
+            <li><span>✓</span> 8 módulos completos</li>
+            <li><span>✓</span> Sandbox ilimitado</li>
+            <li><span>✓</span> Prompt Linter</li>
+            <li><span>✓</span> Historial de sesiones</li>
+            <li><span>✓</span> Multi-tool strategy</li>
+            <li><span>✓</span> Prompt patterns pro</li>
+            <li><span>✓</span> Comunidad completa</li>
+            <li><span>✓</span> Templates reutilizables</li>
+          </ul>
+          <a href="#" class="btn-primary btn-large" id="tier-pro-btn">Empezar con Pro</a>
+          <p class="pricing-guarantee">🔒 Garantía 30 días</p>
+        </div>
+
+        <!-- TEAM -->
+        <div class="tier-card" id="tier-team">
+          <div class="tier-header">
+            <span class="tier-emoji">🔴</span>
+            <h3>Team</h3>
+            <div class="tier-price">
+              <span class="tier-amount">$79</span>
+              <span class="tier-period">/ mes · hasta 10 seats</span>
+            </div>
+          </div>
+          <ul class="tier-features">
+            <li><span>✓</span> Todo lo de Pro</li>
+            <li><span>✓</span> Multi-usuario (hasta 10)</li>
+            <li><span>✓</span> Analytics de equipo</li>
+            <li><span>✓</span> Reportes de progreso</li>
+            <li><span>✓</span> Admin panel</li>
+            <li><span>✓</span> Exportación de datos</li>
+          </ul>
+          <a href="#" class="btn-secondary btn-large" id="tier-team-btn">Contactar para Team</a>
+        </div>
+
+        <!-- ENTERPRISE -->
+        <div class="tier-card tier-enterprise" id="tier-enterprise">
+          <div class="tier-header">
+            <span class="tier-emoji">🟣</span>
+            <h3>Enterprise</h3>
+            <div class="tier-price">
+              <span class="tier-amount">Custom</span>
+              <span class="tier-period">contactanos</span>
+            </div>
+          </div>
+          <ul class="tier-features">
+            <li><span>✓</span> Todo lo de Team</li>
+            <li><span>✓</span> SSO / SAML</li>
+            <li><span>✓</span> DB dedicada</li>
+            <li><span>✓</span> Personalización completa</li>
+            <li><span>✓</span> Soporte prioritario</li>
+            <li><span>✓</span> SLA garantizado</li>
+          </ul>
+          <a href="#" class="btn-secondary btn-large" id="tier-enterprise-btn">Hablar con ventas</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">FAQ</span>
+        <h2>Preguntas frecuentes</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+            ¿Necesito experiencia previa con IA?
+            <span class="faq-arrow">↓</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-1" hidden>
+            No. El módulo 1 cubre todo lo que necesitás entender sobre cómo funcionan los LLMs. Sí necesitás experiencia
+            sólida en desarrollo de software.
+          </div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+            ¿Es específico para .NET o sirve para otros lenguajes?
+            <span class="faq-arrow">↓</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-2" hidden>
+            Los principios son universales. Los ejemplos prácticos están orientados a backend (.NET, pero aplicables a
+            Node, Python, etc.). El foco es ingeniería, no sintaxis.
+          </div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+            ¿Cuánto tiempo lleva completar el curso?
+            <span class="faq-arrow">↓</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-3" hidden>
+            Aproximadamente 12-15 horas de contenido. Podés avanzar a tu ritmo. El acceso es de por vida, por lo que
+            podés revisar cuando lo necesitás en proyectos reales.
+          </div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+            ¿Cubre el módulo de Orquestación conceptos de agentes de IA?
+            <span class="faq-arrow">↓</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-4" hidden>
+            Sí. El módulo 8 cubre cadenas de prompts, roles encadenados, auto-crítica y validación cruzada — bases para
+            entender y construir workflows de agentes de IA.
+          </div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+            ¿Qué pasa si no me sirve?
+            <span class="faq-arrow">↓</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-5" hidden>
+            Garantía de devolución de 30 días, sin preguntas. Si completás los primeros 3 módulos y no te cambia la
+            forma de usar IA, te devuelvo el dinero.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-bracket">&lt;</span>AI.dev<span class="logo-bracket">/&gt;</span>
+        </div>
+        <p class="footer-tagline">Ingeniería con IA. No magia.</p>
+        <div class="footer-links">
+          <a href="#">Términos</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Contacto</a>
+        </div>
+        <p class="footer-copy">© 2026 AI Engineering for Devs. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
