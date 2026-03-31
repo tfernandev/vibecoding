@@ -22,7 +22,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Frontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:3001")
+        policy.WithOrigins("http://localhost:3000", 
+                           "http://localhost:3001", 
+                           "https://vibecoding-ten-teal.vercel.app")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
