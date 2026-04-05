@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { checkBackendStatus } from '@/lib/ai';
 
 // Types representing DB response
 interface ModuleData {
@@ -35,6 +36,13 @@ export default function DashboardPage() {
   const [modules, setModules] = useState<ModuleData[]>(STATIC_MODULES);
   const [stats, setStats] = useState<StatsData | null>(STATIC_STATS);
   const [loading, setLoading] = useState(false);
+  const [backendStatus, setBackendStatus] = useState<'online' | 'offline' | 'checking'>('checking');
+
+  const checkStatus = async () => {
+    setBackendStatus('checking');
+    const isUp = await checkBackendStatus();
+    setBackendStatus(isUp ? 'online' : 'offline');
+  };
 
   useEffect(() => {
     async function fetchDashboard() {
@@ -53,6 +61,7 @@ export default function DashboardPage() {
       }
     }
     fetchDashboard();
+    checkStatus();
   }, []);
 
   const toggleTheme = () => {
@@ -106,8 +115,11 @@ export default function DashboardPage() {
             <p className="subtitle">Explora el poder de la Ingeniería de Prompts.</p>
           </div>
           <div className="profile-badge">
-            <span className="badge-dot" style={{ background: '#00ff88' }}></span>
-            Estado: Máxima Libertad
+            <span className={`badge-dot ${backendStatus === 'online' ? 'online' : backendStatus === 'checking' ? 'checking' : 'offline'}`}></span>
+            {backendStatus === 'online' ? 'Backend Ready' : backendStatus === 'checking' ? 'Connecting...' : 'Backend Sleeping'}
+            {backendStatus === 'offline' && (
+              <button className="wake-btn-mini" onClick={checkStatus} title="Despertar servidor">Recargar ⚡</button>
+            )}
           </div>
         </header>
 

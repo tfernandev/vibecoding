@@ -102,3 +102,24 @@ export async function saveSession(originalPrompt: string, refactoredPrompt: stri
     throw error;
   }
 }
+
+export async function checkBackendStatus() {
+  try {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 6000); // 6s timeout for Render wake up
+
+    const response = await fetch(`${API_BASE_URL}/Debug/tenant`, {
+      method: "GET",
+      headers: {
+        "X-Tenant": "google"
+      },
+      signal: controller.signal
+    });
+    
+    clearTimeout(id);
+    return response.ok;
+  } catch (error) {
+    console.warn("Backend status check failed:", error);
+    return false;
+  }
+}

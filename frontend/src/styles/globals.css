@@ -451,26 +451,52 @@ em {
 }
 
 .badge-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 0 0 8px var(--primary);
-  animation: pulse-dot 2s infinite;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.badge-dot.online {
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+
+.badge-dot.offline {
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+}
+
+.badge-dot.checking {
+  background: var(--secondary);
+  box-shadow: 0 0 8px var(--secondary);
+  animation: pulse-dot 1.5s infinite;
+}
+
+.wake-btn-mini {
+  margin-left: 10px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wake-btn-mini:hover {
+  background: #ff8c00;
+  transform: scale(1.05);
 }
 
 @keyframes pulse-dot {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: scale(0.8);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
 }
 
 .hero-title {

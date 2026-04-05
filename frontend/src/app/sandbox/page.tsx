@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { analyzePrompt, LintResult } from '@/lib/linter';
-import { sendMessage, saveSession } from '@/lib/ai';
+import { sendMessage, saveSession, checkBackendStatus } from '@/lib/ai';
 
 export default function SandboxPage() {
   const [prompt, setPrompt] = useState<string>("");
@@ -11,6 +11,7 @@ export default function SandboxPage() {
   const [aiResponse, setAiResponse] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [backendStatus, setBackendStatus] = useState<'online' | 'offline' | 'checking'>('checking');
 
   // Sync theme on mount
   useEffect(() => {
@@ -34,6 +35,16 @@ export default function SandboxPage() {
     localStorage.setItem('theme', next);
     document.documentElement.setAttribute('data-theme', next);
   };
+
+  const checkStatus = async () => {
+    setBackendStatus('checking');
+    const isUp = await checkBackendStatus();
+    setBackendStatus(isUp ? 'online' : 'offline');
+  };
+
+  useEffect(() => {
+    checkStatus();
+  }, []);
 
   const handleDeepAnalyze = async () => {
     if (!prompt.trim()) return;
@@ -102,6 +113,15 @@ export default function SandboxPage() {
           </Link>
           <h1 className="sandbox-title">Engineering <span className="gradient-text">Sandbox.</span></h1>
           <span className="status-badge">PRIME v3.1</span>
+          <div className={`backend-indicator ${backendStatus}`}>
+             <span className="dot"></span>
+             {backendStatus === 'online' ? 'Backend Online' : backendStatus === 'checking' ? 'Connecting...' : 'Backend Sleeping'}
+             {backendStatus === 'offline' && (
+               <button className="wake-btn" onClick={checkStatus} title="Click to wake up Render instance">
+                 Wake Up ⚡
+               </button>
+             )}
+          </div>
         </div>
         <div className="header-right">
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Cambiar tema">
@@ -398,6 +418,49 @@ export default function SandboxPage() {
         .t-cursor-blink { animation: blink 1s infinite; color: var(--primary); }
 
         @keyframes blink { 50% { opacity: 0; } }
+
+        .backend-indicator {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          padding: 4px 12px;
+          border-radius: 20px;
+          background: rgba(0,0,0,0.05);
+          border: 1px solid rgba(0,0,0,0.05);
+        }
+        .backend-indicator.online { color: var(--success); }
+        .backend-indicator.offline { color: var(--text-muted); }
+        .backend-indicator.checking { color: var(--secondary); }
+        
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: currentColor;
+        }
+        .checking .dot { animation: pulse 1.5s infinite; }
+        
+        .wake-btn {
+          margin-left: 8px;
+          background: var(--primary);
+          color: white;
+          border: none;
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-size: 0.65rem;
+          cursor: pointer;
+          font-weight: 700;
+          transition: transform 0.2s;
+        }
+        .wake-btn:hover { transform: scale(1.05); background: #ff8c00; }
+
+        @keyframes pulse {
+          0% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.2); }
+          100% { opacity: 1; transform: scale(1); }
+        }
       `}</style>
     </div>
   );
