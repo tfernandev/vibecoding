@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using AiDev.Backend.Core;
 using AiDev.Backend.Data;
@@ -35,6 +36,11 @@ public class AiController : ControllerBase
         try
         {
             var result = await _geminiService.ExecutePromptAsync(request.Prompt, request.SystemInstruction);
+            if (result.StartsWith("Error de IA", StringComparison.Ordinal)
+                || result.StartsWith("Error de conexión", StringComparison.Ordinal))
+            {
+                return Ok(new AiResponse { Success = false, Error = result, Response = string.Empty });
+            }
             return Ok(new AiResponse { Response = result, Success = true });
         }
         catch (System.Exception ex)
