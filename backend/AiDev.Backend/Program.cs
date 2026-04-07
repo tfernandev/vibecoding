@@ -27,7 +27,8 @@ builder.Services.AddCors(options =>
             var uri = new Uri(origin);
             return uri.Host == "localhost" || 
                    uri.Host.EndsWith(".vercel.app") || 
-                   uri.Host.EndsWith(".onrender.com");
+                   uri.Host.EndsWith(".onrender.com") ||
+                   uri.Host.EndsWith(".github.io");
         })
         .AllowAnyHeader()
         .AllowAnyMethod();
