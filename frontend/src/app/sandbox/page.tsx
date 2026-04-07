@@ -198,7 +198,7 @@ export default function SandboxPage() {
 
       <style jsx>{`
         .sandbox-wrapper {
-          height: 100vh;
+          min-height: 100vh;
           display: flex;
           flex-direction: column;
           background: var(--bg-main);
@@ -460,6 +460,49 @@ export default function SandboxPage() {
           0% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.4; transform: scale(1.2); }
           100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+          .sandbox-grid {
+            grid-template-columns: 1fr;
+            overflow-y: auto;
+          }
+          .editor-section {
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+          }
+          .sandbox-header {
+            padding: 16px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .sandbox-header {
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-start;
+          }
+          .header-right {
+            width: 100%;
+            justify-content: space-between;
+          }
+          .editor-section, .output-section {
+            padding: 24px 16px;
+          }
+          .terminal-output {
+            padding: 24px;
+          }
+          .sandbox-title {
+            font-size: 1.1rem;
+          }
+          .status-badge {
+            display: none;
+          }
+          .backend-indicator {
+            padding: 4px 8px;
+            font-size: 0.7rem;
+          }
         }
       `}</style>
     </div>
